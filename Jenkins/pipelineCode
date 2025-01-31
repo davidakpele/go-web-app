@@ -7,7 +7,7 @@ pipeline{
     }
     
      environment{
-        docker_hub_username= "akshayarsude1997"
+        docker_hub_username= "davidakpele"
         docker_hub_password = "" //give the password 
      }
     
@@ -20,7 +20,7 @@ pipeline{
         
         stage("git checkout"){
             steps{
-                git credentialsId: "GITHUB-APP", url: "https://github.com/akshayarsude1997/go-web-app.git", branch: "main"
+                git credentialsId: "GITHUB-APP", url: "https://github.com/davidakpele/go-web-app.git", branch: "main"
             }
         }
         
@@ -51,16 +51,16 @@ pipeline{
         
         stage("update the github repository"){
             environment{
-                GIT_REPO_NAME = "https://github.com/akshayarsude1997/go-web-app.git"
-                GIT_USER_NAME = "akshayarsude1997"
+                GIT_REPO_NAME = "https://github.com/davidakpele/go-web-app.git"
+                GIT_USER_NAME = "davidakpele"
             }
             steps{
                 dir("k8s/go-web-app-chart"){
                     withCredentials([usernamePassword(credentialsId: 'GITHUB-APP', usernameVariable: 'GITHUB_USER', passwordVariable: 'GITHUB_TOKEN')]) {
                         sh '''
                     # Set git user information
-                    git config user.email "akshayarsude1997@gmail.com"
-                    git config user.name "akshayarsude1997"
+                    git config user.email "davidakpele@gmail.com"
+                    git config user.name "davidakpele"
                     
                     # Get the build number
                     BUILD_NUMBER=${BUILD_NUMBER}
